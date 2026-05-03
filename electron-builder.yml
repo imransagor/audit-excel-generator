@@ -1,0 +1,40 @@
+appId: com.solvestoneworks.auditexcel
+productName: Audit Excel Generator
+copyright: Copyright © 2024 SolveStone Works
+
+directories:
+  buildResources: resources
+  output: dist
+
+files:
+  - out/**/*
+  - prompts/**/*
+  - node_modules/**/*
+  - package.json
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: resources/icon.ico
+
+mac:
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+  icon: resources/icon.icns
+  category: public.app-category.business
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+
+dmg:
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications

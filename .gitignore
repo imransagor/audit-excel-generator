@@ -1,0 +1,10 @@
+node_modules/
+out/
+dist/
+*.pdf
+*.xlsx
+*.docx
+*.rtf
+.env
+.claude/
+electron.vite.config.*.mjs
