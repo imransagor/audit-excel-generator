@@ -8,3 +8,8 @@ dist/
 .env
 .claude/
 electron.vite.config.*.mjs
+
+# Dev/debug artifacts
+comparison.txt
+compare-outputs.mjs
+samples/

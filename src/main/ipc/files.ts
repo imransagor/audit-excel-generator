@@ -1,6 +1,15 @@
 import { dialog, BrowserWindow } from 'electron'
 import { writeFileSync } from 'fs'
 
+export async function openFolderDialog(win: BrowserWindow): Promise<string | null> {
+  const result = await dialog.showOpenDialog(win, {
+    title: 'Select Folder',
+    properties: ['openDirectory']
+  })
+  if (result.canceled || result.filePaths.length === 0) return null
+  return result.filePaths[0]
+}
+
 export async function openPdfDialog(win: BrowserWindow): Promise<string | null> {
   const result = await dialog.showOpenDialog(win, {
     title: 'Select Audited Financial Statement PDF',

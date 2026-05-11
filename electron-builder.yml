@@ -6,29 +6,40 @@ directories:
   buildResources: resources
   output: dist
 
+# Only ship the compiled output and package.json.
+# electron-builder adds production node_modules automatically from package.json dependencies.
 files:
   - out/**/*
-  - prompts/**/*
-  - node_modules/**/*
   - package.json
+
+# prompts/system.md must live OUTSIDE the asar archive so the main process
+# can reach it via process.resourcesPath at runtime.
+extraResources:
+  - from: prompts/
+    to: prompts/
+
+# Single PNG icon — electron-builder converts to .ico / .icns per platform.
+# Replace resources/icon.png with your own 512×512 PNG for a custom icon.
+icon: resources/icon.png
 
 win:
   target:
     - target: nsis
       arch: [x64]
-  icon: resources/icon.ico
 
 mac:
   target:
     - target: dmg
       arch: [x64, arm64]
-  icon: resources/icon.icns
   category: public.app-category.business
+  hardenedRuntime: false
 
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
+  installerIcon: resources/icon.png
+  uninstallerIcon: resources/icon.png
 
 dmg:
   contents:
