@@ -20,8 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build & package (Windows)
-        run: npm run dist:win
+      - name: Build (compile TypeScript + bundle)
+        run: npm run build
+
+      - name: Package Windows installer
+        run: npx electron-builder --win --publish=never
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: false   # skip code signing
 
@@ -45,8 +48,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build & package (macOS)
-        run: npm run dist:mac
+      - name: Build (compile TypeScript + bundle)
+        run: npm run build
+
+      - name: Package macOS DMG
+        run: npx electron-builder --mac --publish=never
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: false   # skip code signing
 

@@ -18,19 +18,17 @@ extraResources:
   - from: prompts/
     to: prompts/
 
-# Single PNG icon — electron-builder converts to .ico / .icns per platform.
-# Replace resources/icon.png with your own 512×512 PNG for a custom icon.
-icon: resources/icon.png
-
 win:
   target:
     - target: nsis
       arch: [x64]
+  icon: resources/icon.ico          # NSIS requires a real .ico file
 
 mac:
   target:
     - target: dmg
       arch: [x64, arm64]
+  icon: resources/icon.png          # electron-builder converts PNG → .icns on macOS runner
   category: public.app-category.business
   hardenedRuntime: false
 
@@ -38,8 +36,6 @@ nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
-  installerIcon: resources/icon.png
-  uninstallerIcon: resources/icon.png
 
 dmg:
   contents:
